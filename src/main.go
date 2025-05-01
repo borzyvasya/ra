@@ -1,8 +1,17 @@
 package main
 
-import "fmt"
+import (
+    "fmt"
+    "time"
+)
 
 func main() {
-	fmt.Println("asd")
-	ch := chan string("sasd")
+    ch := make(chan string)
+
+    go func() {
+        ch <- "goroutine!"
+    }()
+
+	time.Sleep(3 * time.Second) 
+    fmt.Println(<-ch)
 }
